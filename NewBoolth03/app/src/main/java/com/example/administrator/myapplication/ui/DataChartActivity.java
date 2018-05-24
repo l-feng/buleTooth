@@ -48,9 +48,10 @@ public class DataChartActivity extends Activity {
     }
 
     private void setData() {
-        for (int i = 0; i < 7; i++) {
+        if(orderList!=null && orderList.size()!=0){
+        int sizeNumber=orderList.size()>=7?7:orderList.size();
+        for (int i = 0; i < sizeNumber; i++) {
             LineChartData data = new LineChartData();
-            if(orderList!=null && orderList.size()!=0){
                 data.setItem(orderList.get(i).getData()+"时");
                 if (jumpKind == 1) {
                     data.setPoint(Integer.parseInt(orderList.get(i).getTemperature()));

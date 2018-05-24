@@ -34,7 +34,6 @@ public class OrderDao {
      */
     public boolean isDataExist() {
         int count = 0;
-
         SQLiteDatabase db = null;
         Cursor cursor = null;
 
@@ -89,12 +88,6 @@ public class OrderDao {
 //            db.execSQL("insert into " + OrderDBHelper.TABLE_NAME + " (data, temperature,humidity,infrared,smoke) values (11, '31','12','29','63')");
 //            db.execSQL("insert into " + OrderDBHelper.TABLE_NAME + " (data, temperature,humidity,infrared,smoke) values (12, '35','15','25','65')");
 
-            //TODO
-           /* String time = DateFormat.format("hh", System.currentTimeMillis()).toString();
-            //lan ya
-            for(int i=0;i<7;i++) {
-                db.execSQL("insert into " + OrderDBHelper.TABLE_NAME + " (data, temperature,humidity,infrared,smoke) values (time, temperature,humidity,infrared,smoke)");
-            }*/
             db.setTransactionSuccessful();
         } catch (Exception e) {
             Log.e(TAG, "", e);
@@ -260,9 +253,9 @@ public class OrderDao {
     }
 
     /**
-     * 删除一条数据  此处删除Id为7的数据
+     * 删除一条数据  此处删除的是date的数据
      */
-    public boolean deleteOrder() {
+    public boolean deleteOrder(String date) {
         SQLiteDatabase db = null;
 
         try {
@@ -270,7 +263,7 @@ public class OrderDao {
             db.beginTransaction();
 
             // delete from Orders where Id = 7
-            db.delete(OrderDBHelper.TABLE_NAME, "data = ?", new String[]{String.valueOf(7)});
+            db.delete(OrderDBHelper.TABLE_NAME, "data = ?", new String[]{String.valueOf(date)});
             db.setTransactionSuccessful();
             return true;
         } catch (Exception e) {

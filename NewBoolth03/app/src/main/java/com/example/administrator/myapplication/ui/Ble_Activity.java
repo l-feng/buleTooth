@@ -153,9 +153,9 @@ public class Ble_Activity extends Activity implements OnClickListener {
 
     private void iniSqlData() {
         ordersDao = new OrderDao(this);
-        if (!ordersDao.isDataExist()) {
-            ordersDao.initTable();
-        }
+//        if (!ordersDao.isDataExist()) {
+//            ordersDao.initTable();
+//        }
         String time = DateFormat.format("hh", System.currentTimeMillis()).toString();
         //从数据库获取数据
         // orderList = ordersDao.getTimeDate(time);
@@ -238,8 +238,10 @@ public class Ble_Activity extends Activity implements OnClickListener {
                         + "device SERVICES_DISCOVERED");
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
                 //处理发送过来的数据
+
                 String bluetoothDate = intent.getExtras().getString(
                         BluetoothLeService.EXTRA_DATA);
+                bluetoothDate="10&12&34&89";
                 String[] bluetoothDateArr = bluetoothDate.split("&");
                 if (bluetoothDateArr.length == 4) {
                     Order order = ordersDao.getTimeOneDate(DateFormat.format("hh", System.currentTimeMillis()).toString());
@@ -250,7 +252,6 @@ public class Ble_Activity extends Activity implements OnClickListener {
                         ordersDao.updateOrder(DateFormat.format("hh", System.currentTimeMillis()).toString(),
                                 bluetoothDateArr[0], bluetoothDateArr[1], bluetoothDateArr[2], bluetoothDateArr[3]);
                     }
-
                 } else {
                     System.out.print("BroadcastReceiver :" + "数据格式不对");
                 }
