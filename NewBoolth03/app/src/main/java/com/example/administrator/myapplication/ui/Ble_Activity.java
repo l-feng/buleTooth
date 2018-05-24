@@ -241,7 +241,6 @@ public class Ble_Activity extends Activity implements OnClickListener {
 
                 String bluetoothDate = intent.getExtras().getString(
                         BluetoothLeService.EXTRA_DATA);
-                bluetoothDate="10&12&34&89";
                 String[] bluetoothDateArr = bluetoothDate.split("&");
                 if (bluetoothDateArr.length == 4) {
                     Order order = ordersDao.getTimeOneDate(DateFormat.format("hh", System.currentTimeMillis()).toString());
